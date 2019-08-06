@@ -9,18 +9,58 @@
     <!--Jquery CDN Load Up-->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <!--Moment CDN Load Up-->    
+    <!--Moment CDN Load Up-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <!--Firebase CDN Load Up-->
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-
-
+    <!-- CSS STYLING materialize-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--My Own CSS Style Sheet-->
+    <link rel="stylesheet" href="./assets/CSS/style.css">
 </head>
 
 <body>
-    <p>Page exist</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-m-12 fullSize" id="header">
+                <div class="jumbotron jumbotron-fluid m-4 text-center">
+                    <h1>Train Ticker</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container fullSize border border-secondary rounded p-0">
+                <div class="card-header  bg-info border-info rounded"><h3>Current Train Schedule</h3></div>
+                <div class="card-body text-dark bg-light text-dark">
+                    <table class="table table-striped">
+                        <thead class="thead-dark ">
+                            <tr>
+                                <th scope="col">Train Number</th>
+                                <th scope="col">Train Name</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Frequency(mins)</th>
+                                <th scope="col">Next Arrival</th>
+                                <th scope="col">Minutes Away</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Test Train</td>
+                                <td>Island of Fuck This</td>
+                                <td>30</td>
+                                <td>4:00 PM</td>
+                                <td>4</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="./assets/JS/script.js"></script>
 </body>
 
