@@ -13,3 +13,13 @@ var database = firebase.database();
 
 // database.ref('/Testing').push("True");
 // console.log("finished")
+
+//document Variables:
+
+docTrainInput = $("#inputTrainName");
+docDestInput = $("#inputDest");
+docTrainHour = $("#TrainHour");
+docTrainHour = $("#TrainMinutes");
+docAddTrain = $("#AddTrainBtn");
+docForm = $("#Formie");
+docTBody = $("#Tbody");

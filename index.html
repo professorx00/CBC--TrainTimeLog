@@ -23,7 +23,7 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" id="header">
             <div class="col-md-12">
                 <div class="card bg-dark text-white text-center mb-4">
                     <img src="./assets/imgs/train1sm.jpg" class=" mx-auto rounded" alt="Train Background" id="bgTrain">
@@ -34,14 +34,14 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row" id="tableContainer">
             <div class="container fullSize border border-secondary rounded p-0">
                 <div class="card-header  bg-info border-info rounded">
                     <h3>Current Train Schedule</h3>
                 </div>
                 <div class="card-body text-dark bg-light text-dark">
-                    <table class="table table-striped">
-                        <thead class="thead-dark ">
+                    <table class="table table-striped" id="table">
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Train Number</th>
                                 <th scope="col">Train Name</th>
@@ -51,28 +51,28 @@
                                 <th scope="col">Minutes Away</th>
                             </tr>
                         </thead>
-                        <tbody class="">
-                            <tr>
+                        <tbody id="Tbody">
+                            <!-- <tr>
                                 <th scope="row">1</th>
                                 <td>Test Train</td>
                                 <td>Island of Fuck This</td>
                                 <td>30</td>
                                 <td>4:00 PM</td>
                                 <td>4</td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="formContainer">
             <div class="col-m-12 fullSize bg-dark text-light mt-4">
                 <div class="card-header  bg-info text-dark border-info rounded">
                     <h3>Add Train to Schedule</h3>
                 </div>
                 <div class="card-body text-dark bg-dark text-light">
-                    <form>
+                    <form id="Formie">
                         <div class="form-row">
                             <div class="form-group col-md-6 text-light">
                                 <label for="inputTrainName">Train Name</label>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="form-group col-md-12 text-light text-center">
-                                <button class="btn btn-info" type="submit">Add Train</button>
+                                <button class="btn btn-info" type="submit" id="AddTrainBtn">Add Train</button>
                             </div>
                         </div>
                     </form>
