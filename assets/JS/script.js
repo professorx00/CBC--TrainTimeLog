@@ -48,23 +48,62 @@ docAddTrain.on("click",(event)=>{
     trainStart = moment(docTrainHour.val() + docTrainMinutes.val(), 'HHmm').toDate();
     destination = docDestInput.val().trim();
     frequency = DocFreqInput.val().trim();
-    let minutesDiff = moment().diff(trainStart, "minutes");
-    minutesAway = parseInt(frequency)-(minutesDiff % parseInt(frequency));
-    nextArrival=moment().add(minutesAway,'m');
-    console.log(nextArrival.format("hh:mm A"))
     
+    console.log(trainStart)
+
     let train = {
         Tnumber:counter,
         name:trainName,
         destination:destination,
         frequency:frequency,
-        nextArrival: nextArrival.format("hh:mm A"),
-        minutesAway:minutesAway
+        trainStart:trainStart
     }
-
+    
     database.ref("/trains").push(train);
-
+    
     alert("Employee successfully added");
     // console.log(trainName,destination,frequency);
     // console.log(`Start time is ${trainStart}`)
 })
+
+database.ref('/trains').on("child_added", function(childSnapshot) {
+    console.log(childSnapshot.val());
+    let minutesDiff = moment().diff(childSnapshot.val().trainStart, "minutes");
+    
+    console.log("minute difference " + minutesDiff)
+    console.log("train Start " + childSnapshot.val().trainStart)
+    console.log("frequency "+ childSnapshot.val().frequency)
+
+    minutesAway = parseInt(childSnapshot.val().frequency)-(minutesDiff % parseInt(childSnapshot.val().frequency));
+    nextArrival=moment().add(minutesAway,'m').format("hh:mm A");
+    
+    console.log(minutesAway)
+    let dbTrainName = childSnapshot.val().name;
+    let dbTnumber = childSnapshot.val().Tnumber;
+    let dbDestination = childSnapshot.val().destination;
+    let dbTrainStart = childSnapshot.val().trainStart;
+    let dbFrequency = childSnapshot.val().frequency;
+    let dbNextArrival = nextArrival;
+    let dbMinutesAway = minutesAway;
+
+    console.log("number "+ dbTnumber)
+    console.log("name "+ dbTrainName)
+    console.log("Destination "+ dbDestination)
+    console.log("Frequency "+ dbFrequency)
+    console.log("Next Arrival "+ dbNextArrival)
+    console.log("Minutes Away"+ dbMinutesAway)
+    
+
+    let NewRow = $("<tr>").append(
+        $("<td>").text(dbTrainName),
+        $("<td>").text(dbDestination),
+        $("<td>").text(dbTrainStart),
+        $("<td>").text(dbFrequency),
+        $("<td>").text(dbNextArrival),
+        $("<td>").text(dbMinutesAway)
+    );
+
+    $("#Tbody").append(NewRow)
+
+
+});
