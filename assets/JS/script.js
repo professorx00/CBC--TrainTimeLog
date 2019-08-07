@@ -11,15 +11,60 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-// database.ref('/Testing').push("True");
-// console.log("finished")
+
+
 
 //document Variables:
 
 docTrainInput = $("#inputTrainName");
 docDestInput = $("#inputDest");
+DocFreqInput = $("#inputFreq");
 docTrainHour = $("#TrainHour");
-docTrainHour = $("#TrainMinutes");
+docTrainMinutes = $("#TrainMinutes");
 docAddTrain = $("#AddTrainBtn");
 docForm = $("#Formie");
 docTBody = $("#Tbody");
+
+
+//Global Variables
+
+let trainName;
+let trainStart;
+let destination;
+let frequency;
+let nextArrival;
+let minutesAway;
+let TodaysDate;
+let counter = '0';
+
+
+
+// On click Event of Button
+
+docAddTrain.on("click",(event)=>{
+
+    event.preventDefault()
+    trainName = docTrainInput.val().trim();
+    trainStart = moment(docTrainHour.val() + docTrainMinutes.val(), 'HHmm').toDate();
+    destination = docDestInput.val().trim();
+    frequency = DocFreqInput.val().trim();
+    let minutesDiff = moment().diff(trainStart, "minutes");
+    minutesAway = parseInt(frequency)-(minutesDiff % parseInt(frequency));
+    nextArrival=moment().add(minutesAway,'m');
+    console.log(nextArrival.format("hh:mm A"))
+    
+    let train = {
+        Tnumber:counter,
+        name:trainName,
+        destination:destination,
+        frequency:frequency,
+        nextArrival: nextArrival.format("hh:mm A"),
+        minutesAway:minutesAway
+    }
+
+    database.ref("/trains").push(train);
+
+    alert("Employee successfully added");
+    // console.log(trainName,destination,frequency);
+    // console.log(`Start time is ${trainStart}`)
+})
