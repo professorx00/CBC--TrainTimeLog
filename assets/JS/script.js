@@ -45,7 +45,6 @@ docAddTrain.on("click",(event)=>{
     frequency = DocFreqInput.val().trim();
     // create JSON Object that has all the data needed to be stored in database
     let train = {
-        Tnumber:counter,
         name:trainName,
         destination:destination,
         frequency:frequency,
