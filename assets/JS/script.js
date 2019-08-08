@@ -11,6 +11,21 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
+// $("#logout").on("click",e=>{
+//     console.log("logging out")
+//     firebase.auth().signOut();
+// })
+
+firebase.auth().onAuthStateChanged(firebaseUser => {
+    if(firebaseUser){
+        console.log(firebaseUser);
+    }
+    else{
+        console.log("not logged in")
+    }    
+    
+    });
+
 //document Variables:
 docTrainInput = $("#inputTrainName");
 docDestInput = $("#inputDest");
