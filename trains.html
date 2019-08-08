@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Time Logger</title>
+    <!--Jquery CDN Load Up-->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!--Moment CDN Load Up-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <!--Firebase CDN Load Up-->
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <!-- CSS STYLING materialize-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--My Own CSS Style Sheet-->
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="header">
+            <div class="col-md-12">
+                <div class="card bg-dark text-white text-center mb-4">
+                    <img src="./assets/imgs/train1sm.jpg" class=" mx-auto rounded" alt="Train Background" id="bgTrain">
+                    <div class="card-img-overlay">
+                        <h1 class="card-title font-weight-bold" id="Title">Train Schedule Ticker</h1>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" id="tableContainer">
+            <div class="container fullSize border border-secondary rounded p-0">
+                <div class="card-header  bg-info border-info rounded">
+                    <h3>Current Train Schedule</h3>
+                </div>
+                <div class="card-body text-dark bg-light text-dark">
+                    <table class="table table-striped" id="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Train Name</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Train Start Time</th>
+                                <th scope="col">Frequency(mins)</th>
+                                <th scope="col">Next Arrival</th>
+                                <th scope="col">Minutes Away</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Tbody">
+                            <!-- <tr>
+                                <th scope="row">1</th>
+                                <td>Test Train</td>
+                                <td>Island of Fuck This</td>
+                                <td>30</td>
+                                <td>4:00 PM</td>
+                                <td>4</td>
+                            </tr> -->
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="formContainer">
+            <div class="col-m-12 fullSize bg-dark text-light mt-4">
+                <div class="card-header  bg-info text-dark border-info rounded">
+                    <h3>Add Train to Schedule</h3>
+                </div>
+                <div class="card-body text-dark bg-dark text-light">
+                    <form id="Formie">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 text-light">
+                                <label for="inputTrainName">Train Name</label>
+                                <input type="text" class="form-control" id="inputTrainName" placeholder="Train Name">
+                            </div>
+                            <div class="form-group col-md-6 text-light">
+                                <label for="inputDest">Destination</label>
+                                <input type="text" class="form-control" id="inputDest" placeholder="Destination">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 text-light text-center">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <label for="inputFirstTrain">First Train Time</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select class="custom-select col-md-3" id="TrainHour">
+                                            <option selected>Hours</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                        </select>
+                                        <label for="TrainMinutes">:</label>
+                                        <select class="custom-select col-md-3" id="TrainMinutes">
+                                            <option selected>Minutes</option>
+                                            <option value="00">00</option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                            <option value="32">32</option>
+                                            <option value="33">33</option>
+                                            <option value="34">34</option>
+                                            <option value="35">35</option>
+                                            <option value="36">36</option>
+                                            <option value="37">37</option>
+                                            <option value="38">38</option>
+                                            <option value="39">39</option>
+                                            <option value="40">40</option>
+                                            <option value="41">41</option>
+                                            <option value="42">42</option>
+                                            <option value="43">43</option>
+                                            <option value="44">44</option>
+                                            <option value="45">45</option>
+                                            <option value="46">46</option>
+                                            <option value="47">47</option>
+                                            <option value="48">48</option>
+                                            <option value="49">49</option>
+                                            <option value="50">50</option>
+                                            <option value="51">51</option>
+                                            <option value="52">52</option>
+                                            <option value="53">53</option>
+                                            <option value="54">54</option>
+                                            <option value="55">55</option>
+                                            <option value="56">56</option>
+                                            <option value="57">57</option>
+                                            <option value="58">58</option>
+                                            <option value="59">59</option>
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-group col-md-6 text-light">
+                                <label for="frequency">Frequency (minutes)</label>
+                                <input type="text" class="form-control" id="inputFreq" placeholder="Frequency in minutes">
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-12 text-light text-center">
+                                <button class="btn btn-info" type="submit" id="AddTrainBtn">Add Train</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="./assets/JS/script.js"></script>
+</body>
+
+</html>

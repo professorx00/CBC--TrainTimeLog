@@ -1,0 +1,14 @@
+.hide{
+    display: none;
+}
+div.container{
+    margin-top: 10%;
+}
+#userlogin{
+    display: flex;
+    flex-direction: column;
+}
+.error{
+    color: red;
+    font-weight: bolder;
+}
