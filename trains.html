@@ -35,7 +35,32 @@
                 You Have Successful Add A Train!
                 <button class="btn btn-info" id="close">Close</button>
             </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" id="updateModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div>
+                    <form id="updateForm">
+                        <div class="form-group" id="updateInput">
+                            <label for="updateName">Update Name:</label>
+                            <input type="text" name="updateName" id="updateName">
+                            <label for="updateDestination">Update Destination:</label>
+                            <input type="text" name="updateDestination" id="updateDestination">
+                            <label for="updateFrequency">Update Frequency</label>
+                            <input type="text" name="updateFrequency" id="updateFrequency">
+                        </div>
+                        <div class="form-group" id="buttons">
+                            <button class="btn btn-info" id="updateTrainBtn">Update</button>
+                            <button class="btn btn-info" id="updateClose">Close</button>
+                        </div>
+ 
+                    </form>
+                </div>
 
+
+            </div>
         </div>
     </div>
     <div class="container">
@@ -73,6 +98,8 @@
                                 <th scope="col">Frequency(mins)</th>
                                 <th scope="col">Next Arrival</th>
                                 <th scope="col">Minutes Away</th>
+                                <th scope="col">Remove</th>
+                                <th scope="col">Update</th>
                             </tr>
                         </thead>
                         <tbody id="Tbody">
