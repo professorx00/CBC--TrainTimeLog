@@ -15,7 +15,7 @@ var database = firebase.database();
 //     console.log("logging out")
 //     firebase.auth().signOut();
 // })
- 
+
 firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
         console.log(firebaseUser);
@@ -130,7 +130,7 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
     //Removes Extract the Space, Commas, Special Characters
     let idName = dbTrainName.replace(/[^a-zA-Z0-9]/g, '');
     // Adds Remove Button
-    let btn = $("<button>").html('<span class="long">Remove</span>')
+    let btn = $("<button>").text('R')
         .addClass("btn btn-info removeBtn")
         .attr("data-train", `${dbTrainName}`)
         .on("click", e => {
@@ -150,7 +150,7 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
                 trains.splice(Tindex, 1);
             }
         });
-    let updateBtn = $("<button>").html('<span class="long">Update</span>')
+    let updateBtn = $("<button>").text('U')
         .addClass("btn btn-info UpdateBtn")
         .attr("data-train", `${dbTrainName}`)
         .on("click", e => {
@@ -160,6 +160,7 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
             //grabs Train Information
             targetTrain = $(e.target).attr("data-train");
             //Remove Special Characters
+            console.log(targetTrain)
             TRName = targetTrain.replace(/[^a-zA-Z0-9]/g, '');
             updateModal(targetTrain);
             //changes Train name in train array
@@ -169,7 +170,13 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
             }
         });
     //create the table row with a id of Train
-    let NewRow = $("<tr>").append($("<td>").text(dbTrainName).attr("id", `${idName}Name`), $("<td>").text(dbDestination).attr("id", `${idName}Dest`), $("<td>").text(prettyTrainStart), $("<td>").text(dbFrequency).attr("id", `${idName}freq`), $("<td>").text(nextArrival).attr("id", `${idName}NextArrival`), $("<td>").text(minutesAway).attr("id", `${idName}MinutesAway`), $("<td>").append(btn), $("<td>").append(updateBtn)).attr("id", `${idName}Row`);
+    let NewRow = $("<tr>").append($("<td>").text(dbTrainName).attr("id", `${idName}Name`), 
+    $("<td>").text(dbDestination).attr("id", `${idName}Dest`), 
+    $("<td>").text(prettyTrainStart), 
+    $("<td>").text(dbFrequency).attr("id", `${idName}freq`), 
+    $("<td>").text(nextArrival).attr("id", `${idName}NextArrival`), 
+    $("<td>").text(minutesAway).attr("id", `${idName}MinutesAway`), 
+    $("<td>").append(btn), $("<td>").append(updateBtn)).attr("id", `${idName}Row`);
     //Append to body
     $("#Tbody").append(NewRow);
 }
@@ -223,7 +230,7 @@ function updateModal(train) {
         //Removes from train array
         Tindex = trains.indexOf(targetTrain);
         if (Tindex > -1) {
-            trains.splice(Tindex, 1,newName);
+            trains.splice(Tindex, 1, newName);
         }
 
         var update = {
