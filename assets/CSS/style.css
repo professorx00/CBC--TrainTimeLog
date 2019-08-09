@@ -2,7 +2,6 @@
     width: 100vw;
 }
 #Title{
-    font-size: 4.5rem;
     text-shadow: #474747 3px 5px 2px;
     align-self: center;
 
@@ -18,4 +17,107 @@
 #updateInput{
     display:flex;
     flex-direction: column;
+}
+h1{
+    font-size:3.5rem;
+}
+@media only screen and (max-width: 1200px){
+    img{
+        width: 70vw;
+    }
+    table{
+        width:70vw;
+        font-size: 1vw;
+    }
+    button{
+        width: 10vw;
+        text-align: center !important;
+    }
+    
+    
+}
+
+@media only screen and (max-width: 992px){
+    img{
+        width: 80vw;
+    }
+    table{
+        width: 70vw;
+        font-size: 1vw;
+    }
+    button{
+        width: 5vw;
+        font-size: 1vw;
+    }
+    
+}
+@media only screen and (max-width: 775px){
+    img{
+        width: 80vw;
+    }
+    table{
+        width: 70vw;
+        font-size: 1vw;
+    }
+    button{
+        width: 5vw;
+        font-size: 1vw;
+    }
+    div.container{
+        max-width:100vw;
+    }
+    button.btn{
+        font-size: .5rem;
+    }
+    h1{
+        font-size:2.5rem;
+    }
+    
+}
+@media only screen and (max-width: 768px){
+    img{
+        width: 80vw;
+    }
+    
+    table{
+        width: 70vw;
+        font-size: 1vw;
+    }
+    button{
+        width: 5vw;
+        font-size: 1vw;
+        
+    }
+    div.container{
+        max-width:100vw;
+    }
+    .table td, .table th{
+        padding: 2 rem
+    }
+    
+}
+@media only screen and (max-width: 576px){
+    img{
+        width: 80vw;
+    }
+    button{
+        width: 5vw;
+        font-size: 1vw;
+    }
+    div.container{
+        max-width:100vw;
+    }
+    .table td, .table th{
+        padding: 0;
+    }
+    span.long{
+        display: none;
+    }
+    button.btn{
+        height: 7vh;
+    }
+    h1{
+        font-size:1.75rem;
+    }
+
 }

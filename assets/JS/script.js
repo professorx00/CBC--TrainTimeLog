@@ -130,7 +130,7 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
     //Removes Extract the Space, Commas, Special Characters
     let idName = dbTrainName.replace(/[^a-zA-Z0-9]/g, '');
     // Adds Remove Button
-    let btn = $("<button>").text("Remove")
+    let btn = $("<button>").html('<span class="long">Remove</span>')
         .addClass("btn btn-info removeBtn")
         .attr("data-train", `${dbTrainName}`)
         .on("click", e => {
@@ -150,7 +150,7 @@ function addNewRow(dbTrainStart, dbFrequency, dbTrainName, dbDestination) {
                 trains.splice(Tindex, 1);
             }
         });
-    let updateBtn = $("<button>").text("Update")
+    let updateBtn = $("<button>").html('<span class="long">Update</span>')
         .addClass("btn btn-info UpdateBtn")
         .attr("data-train", `${dbTrainName}`)
         .on("click", e => {
