@@ -3,7 +3,7 @@ var firebaseConfig = {
     authDomain: "traintimelogger.firebaseapp.com",
     databaseURL: "https://traintimelogger.firebaseio.com",
     projectId: "traintimelogger",
-    // storageBucket: "traintimelogger.appspot.com",
+    storageBucket: "traintimelogger.appspot.com",
     messagingSenderId: "158876298270",
     appId: "1:158876298270:web:2baf482592a7ccfd"
 };
@@ -17,14 +17,14 @@ var database = firebase.database();
 // })
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
-    if(firebaseUser){
+    if (firebaseUser) {
         console.log(firebaseUser);
     }
-    else{
+    else {
         console.log("not logged in")
-    }    
-    
-    });
+    }
+
+});
 
 //document Variables:
 docTrainInput = $("#inputTrainName");
@@ -44,9 +44,12 @@ let destination;
 let frequency;
 let nextArrival;
 let minutesAway;
-let trains=[]
+let trains = []
 
-
+$("#logOut").on("click", e => {
+    firebase.auth().signOut();
+    window.location.href = "./index.html"
+})
 
 // On click Event of Button
 
@@ -71,11 +74,20 @@ docAddTrain.on("click", (event) => {
     //alert User 
     //TODO: change to a module from bootstrap
     // alert("Train successfully added");
+
+    $('#myModal').modal()
+    $('#myModal').modal('show')
+    console.log("Modal Work")
+    $("#close").on("click", e => {
+        console.log("close")
+        $('#myModal').modal('hide');
+    })
 })
+
 
 //on child change update table
 database.ref('/trains').on("child_added", function (childSnapshot) {
-    
+
     //Set variables for table insertion
     let dbTrainName = childSnapshot.val().name;
     trains.push(dbTrainName)
@@ -89,7 +101,7 @@ database.ref('/trains').on("child_added", function (childSnapshot) {
     // console.log("minutesDiff is " + minutesDiff)
     minutesAway = parseInt(dbFrequency) - (minutesDiff % parseInt(dbFrequency));
     // console.log(minutesAway)
-    nextArrival = moment().add(minutesAway, 'm').format("hh:mm A");
+    nextArrival = moment().add(minutesAway, 'm').format("hh:mm:ss A");
 
     let idName = dbTrainName.replace(/[^a-zA-Z0-9]/g, '');
 
@@ -107,21 +119,25 @@ database.ref('/trains').on("child_added", function (childSnapshot) {
     setInterval(() => {
         currentName = dbTrainName
         // console.log("Updating" + dbTrainName)
-        for(let t=0;t<trains.length;t++){
-            
-            if(trains[t]==currentName){
+        for (let t = 0; t < trains.length; t++) {
+
+            if (trains[t] == currentName) {
                 let tidName = trains[t].replace(/[^a-zA-Z0-9]/g, '');
 
                 let minutesDiff = moment().diff(moment(dbTrainStart, "X"), "minutes");
                 minutesAway = parseInt(dbFrequency) - (minutesDiff % parseInt(dbFrequency));
-                nextArrival = moment().add(minutesAway, 'm').format("hh:mm A");
-                console.log(`the ${tidName} is ${minutesAway} and will Arrive ${nextArrival}`)
+                nextArrival = moment().add(minutesAway, 'm').format("hh:mm:ss A");
+                // console.log(`the ${tidName} is ${minutesAway} and will Arrive ${nextArrival}`)
                 $(`#${tidName}NextArrival`).text(nextArrival);
                 $(`#${tidName}MinutesAway`).text(minutesAway);
-
             }
         }
 
-    }, 30000);
-    
+    }, 1000);
+
 });
+
+setInterval(() => {
+    let time = moment().format("MM/DD/YYYY hh:mm:ss A")
+    $("#time").text(time)
+}, 1000)

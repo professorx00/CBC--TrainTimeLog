@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Acme|Gentium+Book+Basic&display=swap');
+
+
+body{
+    background-color: #6b402d;
+    
+}
 .hide{
     display: none;
 }
@@ -11,4 +18,27 @@ div.container{
 .error{
     color: red;
     font-weight: bolder;
+}
+div#container{
+    color:#0c1416;
+    background-color:#8f989d;
+    padding: 2rem;
+    border: 2px solid #f7ac1b;
+    font-family: 'Acme', sans-serif;
+    font-size: 1.5rem;
+}
+
+label{
+    font-size: 2.5rem;
+}
+input{
+    font-family: 'Gentium Book Basic', serif;
+    font-size: 1rem;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: #f7ac1b !important;
+}
+.btn-secondary, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #f7ac1b !important;
 }

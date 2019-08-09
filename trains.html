@@ -12,16 +12,37 @@
     <!--Moment CDN Load Up-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <!--Firebase CDN Load Up-->
-    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
     <!-- CSS STYLING materialize-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--My Own CSS Style Sheet-->
     <link rel="stylesheet" href="./assets/CSS/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                You Have Successful Add A Train!
+                <button class="btn btn-info" id="close">Close</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <header class="bg-info text-right" id="head">
+            <button class="btn btn-info" id="logOut">Log Out</button>
+        </header>
+    </div>
     <div class="container">
         <div class="row" id="header">
             <div class="col-md-12">
@@ -29,6 +50,9 @@
                     <img src="./assets/imgs/train1sm.jpg" class=" mx-auto rounded" alt="Train Background" id="bgTrain">
                     <div class="card-img-overlay">
                         <h1 class="card-title font-weight-bold" id="Title">Train Schedule Ticker</h1>
+                    </div>
+                    <div class="card-im-overlay">
+                        <h3 id="time"></h3>
                     </div>
                 </div>
             </div>
@@ -52,6 +76,7 @@
                             </tr>
                         </thead>
                         <tbody id="Tbody">
+                            <!--Example of the Dynamtically Generated TR-->
                             <!-- <tr>
                                 <th scope="row">1</th>
                                 <td>Test Train</td>
@@ -94,6 +119,7 @@
                                     <div class="col-md-12">
                                         <select class="custom-select col-md-3" id="TrainHour">
                                             <option selected>Hours</option>
+                                            <option value="00">00</option>
                                             <option value="01">01</option>
                                             <option value="02">02</option>
                                             <option value="03">03</option>
@@ -117,7 +143,6 @@
                                             <option value="21">21</option>
                                             <option value="22">22</option>
                                             <option value="23">23</option>
-                                            <option value="24">24</option>
                                         </select>
                                         <label for="TrainMinutes">:</label>
                                         <select class="custom-select col-md-3" id="TrainMinutes">
@@ -192,18 +217,22 @@
                             </div>
                             <div class="form-group col-md-6 text-light">
                                 <label for="frequency">Frequency (minutes)</label>
-                                <input type="text" class="form-control" id="inputFreq" placeholder="Frequency in minutes">
+                                <input type="text" class="form-control" id="inputFreq"
+                                    placeholder="Frequency in minutes">
                             </div>
                         </div>
                         <div class="form-row mt-3">
                             <div class="form-group col-md-12 text-light text-center">
-                                <button class="btn btn-info" type="submit" id="AddTrainBtn">Add Train</button>
+                                <button class="btn btn-info" type="button" id="AddTrainBtn" data-toggle="modal"
+                                    data-target="#myModal">Add Train</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-firestore.js"></script>
         <script src="./assets/JS/script.js"></script>
 </body>
 

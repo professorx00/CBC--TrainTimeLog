@@ -7,3 +7,11 @@
     align-self: center;
 
 }
+*.bg-info{
+    background-color: #ff6324 !important;
+}
+
+
+.btn-info, .btn-info:active, .btn-info:visited {
+    background-color: #f7ac1b !important;
+}
