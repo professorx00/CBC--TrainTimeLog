@@ -16,8 +16,9 @@ div.container{
     flex-direction: column;
 }
 .error{
-    color: red;
+    color: #f7ac1b;
     font-weight: bolder;
+    text-shadow: #0c1416 1px 1px;
 }
 div#container{
     color:#0c1416;

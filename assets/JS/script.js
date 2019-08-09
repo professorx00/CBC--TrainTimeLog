@@ -82,6 +82,7 @@ docAddTrain.on("click", (event) => {
         console.log("close")
         $('#myModal').modal('hide');
     })
+    docForm[0].reset();
 })
 
 
@@ -101,7 +102,7 @@ database.ref('/trains').on("child_added", function (childSnapshot) {
     // console.log("minutesDiff is " + minutesDiff)
     minutesAway = parseInt(dbFrequency) - (minutesDiff % parseInt(dbFrequency));
     // console.log(minutesAway)
-    nextArrival = moment().add(minutesAway, 'm').format("hh:mm:ss A");
+    nextArrival = moment().add(minutesAway, 'm').format("hh:mm A");
 
     let idName = dbTrainName.replace(/[^a-zA-Z0-9]/g, '');
 
@@ -126,7 +127,7 @@ database.ref('/trains').on("child_added", function (childSnapshot) {
 
                 let minutesDiff = moment().diff(moment(dbTrainStart, "X"), "minutes");
                 minutesAway = parseInt(dbFrequency) - (minutesDiff % parseInt(dbFrequency));
-                nextArrival = moment().add(minutesAway, 'm').format("hh:mm:ss A");
+                nextArrival = moment().add(minutesAway, 'm').format("hh:mm A");
                 // console.log(`the ${tidName} is ${minutesAway} and will Arrive ${nextArrival}`)
                 $(`#${tidName}NextArrival`).text(nextArrival);
                 $(`#${tidName}MinutesAway`).text(minutesAway);
