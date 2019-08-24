@@ -115,7 +115,9 @@ trainData.ref("/trains").on("child_added", function(childSnapshot, prevChildKey)
     }
     console.log("tMinutes:", tMinutes);
     console.log("tArrival:", tArrival);
-  
+
+    let remove = $("<button>").addClass("btn btn-info UpdateBtn");  
+    let update = $("<button>").addClass("btn btn-info UpdateBtn");  
     // Add each train's data into the table
     let table = $("#train-table");
     let newRow = $("<tr>");
@@ -125,8 +127,9 @@ trainData.ref("/trains").on("child_added", function(childSnapshot, prevChildKey)
         .append($("<td>").text(tFrequency))
         .append($("<td>").text(tArrival))
         .append($("<td>").text(tMinutes))
-        .append($("<td>").append("<button>").text("R"))
-        .append($("<td>").append("<button>").text("U"))
+        .append($("<td>").append(remove))
+        .append($("<td>").append(update))
+
     table.append(newRow)
   });
 //on child change update table
