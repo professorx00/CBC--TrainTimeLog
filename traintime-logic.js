@@ -53,7 +53,7 @@ $("#add-train-btn").on("click", function(event) {
   // Logs everything to console
   console.log(newTrain.name);
   console.log(newTrain.destination);
-  console.log(newTrain.firstTrain);
+  console.log(typeof newTrain.firstTrain);
   console.log(newTrain.frequency);
 
   // Alert
@@ -75,7 +75,7 @@ trainData.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var tDestination = childSnapshot.val().destination;
   var tFrequency = childSnapshot.val().frequency;
   var tFirstTrain = childSnapshot.val().firstTrain;
-
+  console.log(tFirstTrain)
   var timeArr = tFirstTrain.split(":");
   var trainTime = moment()
     .hours(timeArr[0])

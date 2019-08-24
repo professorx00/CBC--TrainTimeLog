@@ -49,19 +49,25 @@ docAddTrain.on("click", (event) => {
     let destination = $("#inputDest").val().trim();
     let frequency = $("#inputFreq").val().trim();
     let firstTrain = $("#firstTrain").val().trim()
-    
-    trains.push(trainName.replace(/[^a-zA-Z0-9]/g, ''))
+    let key = trainName.replace(/[^a-zA-Z0-9]/g, '');
+    trains.push(key)
 
     // Creates local "temporary" object for holding train data
     var newTrain = {
         name: trainName,
         destination: destination,
         firstTrain: firstTrain,
-        frequency: frequency
+        frequency: frequency,
+        update: true
     };
-
+    console.log(newTrain)
     //push object to database in train table
-    database.ref("/trains").child(trainName).set(train);
+    trainData.ref("trains").child(key).set(newTrain);
+    // trainData.ref().push(newTrain);
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.firstTrain);
+    console.log(newTrain.frequency);
 
     // alert("Train successfully added");
     $('#myModal').modal();
@@ -73,7 +79,56 @@ docAddTrain.on("click", (event) => {
     docForm[0].reset();
 })
 
-
+trainData.ref("/trains").on("child_added", function(childSnapshot, prevChildKey) {
+    console.log(childSnapshot.val());
+  
+    // Store everything into a variable.
+    let tName = childSnapshot.val().name;
+    let tDestination = childSnapshot.val().destination;
+    let tFrequency = childSnapshot.val().frequency;
+    let tFirstTrain = childSnapshot.val().firstTrain;
+    console.log(childSnapshot.val())
+    let timeArr = tFirstTrain.split(":");
+    let trainTime = moment()
+      .hours(timeArr[0])
+      .minutes(timeArr[1]);
+    let maxMoment = moment.max(moment(), trainTime);
+    let tMinutes;
+    let tArrival;
+  
+    // If the first train is later than the current time, sent arrival to the first train time
+    if (maxMoment === trainTime) {
+      tArrival = trainTime.format("hh:mm A");
+      tMinutes = trainTime.diff(moment(), "minutes");
+    } else {
+      // Calculate the minutes until arrival using hardcore math
+      // To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time
+      // and find the modulus between the difference and the frequency.
+      var differenceTimes = moment().diff(trainTime, "minutes");
+      console.log(differenceTimes)
+      var tRemainder = differenceTimes % tFrequency;
+      tMinutes = tFrequency - tRemainder;
+      // To calculate the arrival time, add the tMinutes to the current time
+      tArrival = moment()
+        .add(tMinutes, "m")
+        .format("hh:mm A");
+    }
+    console.log("tMinutes:", tMinutes);
+    console.log("tArrival:", tArrival);
+  
+    // Add each train's data into the table
+    let table = $("#train-table");
+    let newRow = $("<tr>");
+    newRow
+        .append($("<td>").text(tName))
+        .append($("<td>").text(tDestination))
+        .append($("<td>").text(tFrequency))
+        .append($("<td>").text(tArrival))
+        .append($("<td>").text(tMinutes))
+        .append($("<td>").append("<button>").text("R"))
+        .append($("<td>").append("<button>").text("U"))
+    table.append(newRow)
+  });
 //on child change update table
 // database.ref('/trains').on("child_added", function (childSnapshot) {
 
